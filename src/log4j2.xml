@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO"><!--- bezieht sich auf log4 -->
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t]  %-5level %logger{36} %M Line:%L - %msg%n" /> <!-- Ausgabe Pattern Console  -->
+		</Console>
+		<RollingFile name="file" fileName="app-info.log"
+			filePattern="app-info-%d{yyyy-MM-dd--mm}.log"><!--  Format bestimmt Intervall in dem neues File geschrieben wird hier:mm = minute-->
+			<PatternLayout>
+				<pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n <!-- Ausgabe Pattern File  -->
+				</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Root level="Trace"><!-- All / Trace /Debug / Info / warn / error /Fatal / OFF -->
+			<AppenderRef ref="console" />	 <!-- Ausgabe Ort Console -->
+		<!--	<AppenderRef ref="file" />  Ausgabe Ort File -->
+		</Root>
+	</Loggers>
+</Configuration>

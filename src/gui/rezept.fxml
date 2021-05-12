@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="rootBorderPane" prefHeight="547.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.RezeptController">
+   <top>
+      <MenuBar prefHeight="25.0" prefWidth="1165.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <TabPane prefHeight="0.0" prefWidth="0.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Alle Rezepte">
+            <content>
+                  <VBox>
+                     <children>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="1113.0">
+                           <children>
+                              <Button layoutX="435.0" layoutY="15.0" mnemonicParsing="false" onAction="#ar_onAct_FindAllRecipes" prefHeight="25.0" prefWidth="244.0" text="Aktualisiere Rezept Datenbank" />
+                           </children>
+                        </AnchorPane>
+                        <TableView fx:id="ar_TableView" editable="true" prefHeight="488.0" prefWidth="1113.0">
+                          <columns>
+                            <TableColumn fx:id="ar_nameCol" onEditCommit="#ar_onEditString" prefWidth="274.0" text="Gericht" />
+                            <TableColumn fx:id="ar_descriptionCol" onEditCommit="#ar_onEditString" prefWidth="361.0" text="Beschreibung" />
+                              <TableColumn fx:id="ar_portionCol" onEditCommit="#ar_onEditDouble" prefWidth="69.0" text="Portion" />
+                              <TableColumn fx:id="ar_durationCol" onEditCommit="#ar_onEditInt" prefWidth="86.0" text="Dauer[min]" />
+                              <TableColumn fx:id="ar_pictureCol" prefWidth="312.0" text="Bild" />
+                              <TableColumn fx:id="ar_picturePathCol" onEditCommit="#ar_onEditString" prefWidth="81.0" text="Bildpfad" visible="false" />
+                              <TableColumn fx:id="ar_idJavaCol" prefWidth="75.0" text="idjava" visible="false" />
+                          </columns>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </TableView>
+                     </children>
+                  </VBox>
+            </content>
+          </Tab>
+          <Tab fx:id="nr_Tab" text="Neues Rezept">
+            <content>
+                  <HBox>
+                     <children>
+                        <AnchorPane prefHeight="436.0" prefWidth="324.0">
+                           <children>
+                              <Label layoutX="22.0" layoutY="131.0" text="Dauer Gesamt: " />
+                              <Label layoutX="28.0" layoutY="14.0" text="Titel:" />
+                              <Label layoutX="28.0" layoutY="69.0" text="Bild: " />
+                              <TextField fx:id="nr_TitelTextField" layoutX="21.0" layoutY="31.0" prefHeight="25.0" prefWidth="247.0" />
+                              <TextField fx:id="nr_PicPathTextField" layoutX="22.0" layoutY="90.0" prefHeight="25.0" prefWidth="255.0" promptText="UnsichtbaresBIldTextfeld" visible="false" />
+                              <TextField fx:id="nr_DurationTextField" layoutX="22.0" layoutY="155.0" prefHeight="25.0" prefWidth="256.0" />
+                              <Label layoutX="23.0" layoutY="196.0" text="Person / Portion:" />
+                              <TextField fx:id="nr_PortionTextField" layoutX="22.0" layoutY="218.0" prefHeight="25.0" prefWidth="259.0" />
+                              <Button layoutX="48.0" layoutY="440.0" mnemonicParsing="false" onAction="#nr_onAct_addRecipe" prefHeight="25.0" prefWidth="203.0" text="Rezept Hinzufügen" />
+                              <Label layoutX="27.0" layoutY="265.0" text="Zubereitung:" />
+                              <TextArea fx:id="nr_descriptionTextArea" layoutX="23.0" layoutY="285.0" prefHeight="142.0" prefWidth="276.0" wrapText="true" />
+                              <Button layoutX="20.0" layoutY="90.0" mnemonicParsing="false" onAction="#nr_onAct_addPicture" prefHeight="33.0" prefWidth="112.0" text="Bild hinzufügen" />
+                              <ImageView fx:id="nr_ImageView" fitHeight="59.0" fitWidth="97.0" layoutX="174.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                        <VBox prefHeight="449.0" prefWidth="793.0">
+                           <children>
+                              <AnchorPane prefHeight="84.0" prefWidth="793.0">
+                                 <children>
+                                    <Button layoutX="657.0" layoutY="10.0" mnemonicParsing="false" onAction="#nr_onAct_addIngredient" text="Zutat hinzufügen" />
+                                    <Label layoutX="14.0" layoutY="14.0" text="Zutat:" />
+                                    <Label layoutX="305.0" layoutY="14.0" text="Menge" />
+                                    <TextField fx:id="nr_IngredientAmountTextField" alignment="CENTER_RIGHT" layoutX="356.0" layoutY="10.0" prefHeight="25.0" prefWidth="91.0" />
+                                    <ComboBox fx:id="nr_IngredientCmbBox" layoutX="60.0" layoutY="10.0" onAction="#nr_onAct_CmbBoxPick" prefHeight="25.0" prefWidth="200.0" />
+                                    <Label fx:id="nr_AmountIngredientLabel" layoutX="453.0" layoutY="14.0" text="Label" />
+                                 </children>
+                              </AnchorPane>
+                              <TableView fx:id="nr_TableView" prefHeight="442.0" prefWidth="791.0">
+                                <columns>
+                                  <TableColumn fx:id="nr_NameCol" prefWidth="484.0" text="Name" />
+                                  <TableColumn fx:id="nr_AmountCol" prefWidth="169.0" text="Menge" />
+                                    <TableColumn fx:id="nr_UnitCol" prefWidth="137.0" text="Einheit" />
+                                </columns>
+                                 <padding>
+                                    <Insets bottom="5.0" right="5.0" />
+                                 </padding>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+            </content>
+          </Tab>
+            <Tab text="Rezept bearbeiten">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Rezept Import">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Zutaten">
+               <content>
+                  <HBox>
+                     <children>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="475.0" prefWidth="632.0">
+                           <children>
+                              <Button layoutX="43.0" layoutY="247.0" mnemonicParsing="false" onAction="#ai_onAct_FindAllIngrdients" prefHeight="25.0" prefWidth="244.0" text="Aktualisiere Zutaten Datenbank" />
+                              <Label layoutX="14.0" layoutY="22.0" text="Name:" />
+                              <Label layoutX="12.0" layoutY="68.0" text="Einheit:" />
+                              <TextField fx:id="ai_NameTextField" layoutX="64.0" layoutY="18.0" prefHeight="25.0" prefWidth="201.0" />
+                              <TextField fx:id="ai_UnitTextField" layoutX="90.0" layoutY="64.0" />
+                              <Button layoutX="111.0" layoutY="115.0" mnemonicParsing="false" onAction="#ai_onAct_AddIngrdient" text="Zutat hinzufügen" />
+                           </children>
+                        </AnchorPane>
+                        <TableView fx:id="ai_TableView" editable="true" prefHeight="414.0" prefWidth="1113.0">
+                          <columns>
+                            <TableColumn fx:id="ai_IdCol" prefWidth="145.0" text="ID" />
+                            <TableColumn fx:id="ai_NameCol" onEditCommit="#ai_onEditString" prefWidth="447.0" text="Name" />
+                              <TableColumn fx:id="ai_UnitCol" onEditCommit="#ai_onEditString" prefWidth="204.0" text="Unit" />
+                          </columns>
+                           <padding>
+                              <Insets bottom="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </TableView>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <Label fx:id="infoLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="1253.0" text="Info Label" textAlignment="CENTER" textFill="#f80707" wrapText="true" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
